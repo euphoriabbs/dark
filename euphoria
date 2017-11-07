@@ -1,0 +1,3 @@
+#!/bin/bash
+x84 --config .x84/default.ini --logger .x84/logging.ini
+

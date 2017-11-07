@@ -1,0 +1,9 @@
+.vscode
+*.log
+*.swp
+*.bak
+.x84/data
+.x84/ssh*
+.x84/daily.log
+*.pyc
+
