@@ -92,7 +92,7 @@ syncterm_font = get_ini(
 #: on-connect banner
 art_file = get_ini(
     section='matrix', key='art_file'
-) or os.path.join(here, 'art', 'matrix.ans')
+) or os.path.join(here, 'art', 'welcome.ans')
 
 #: encoding on banner
 art_encoding = get_ini(
@@ -143,11 +143,10 @@ def display_banner(term):
     highlight = getattr(term, color_primary)
     sep = getattr(term, color_secondary)(u'::')
 
-    # display on-connect banner (`art_file`)
-    map(echo, showart(art_file, encoding=art_encoding, center=False))
+    echo(term.clear) # clear the screen...
 
-    #echo(os.system(u"press-enter"))
-    term.clear_eol
+    # display on-connect banner (`art_file`)
+    map(echo, showart(art_file, encoding=art_encoding, center=True))
 
     # display various ini-configured login username aliases.
     if new_allowed:
@@ -195,7 +194,7 @@ def authenticate_user(handle, password):
 
 
 def do_login(term):
-    sep_ok = getattr(term, color_secondary)(u'asdlaksdlaskdl')
+    sep_ok = getattr(term, color_secondary)(u'::')
     sep_bad = getattr(term, color_primary)(u'::')
     colors = {'highlight': getattr(term, color_primary)}
     for _ in range(login_max_attempts):
