@@ -148,16 +148,19 @@ def display_banner(term):
     # display on-connect banner (`art_file`)
     map(echo, showart(art_file, encoding=art_encoding, center=True))
 
+    map(echo, showart("./art/login.ans", encoding=art_encoding, center=True))
+
     # display various ini-configured login username aliases.
     if new_allowed:
-        echo(u"   Login as '{0}' to create an account."
-             .format(highlight(new_usernames[0])))
+
+        echo(term.center(u"\r\nLogin as '{0}' to create an account."
+             .format(highlight(new_usernames[0]))))
     if anonymous_allowed:
-        echo(u"\r\n   Login as '{0}' is allowed."
+        echo(u"\r\nLogin as '{0}' is allowed."
              .format(highlight(anonymous_names[0])))
     if reset_allowed:
-        echo(u"\r\n   Forgot password? Login as '{0}'."
-             .format(highlight('reset')))
+        echo(term.center(u"\r\nForgot password? Login as '{0}'."
+             .format(highlight('reset'))))
 
 
 def authenticate_user(handle, password):
@@ -198,7 +201,10 @@ def do_login(term):
     sep_bad = getattr(term, color_primary)(u'::')
     colors = {'highlight': getattr(term, color_primary)}
     for _ in range(login_max_attempts):
+
+        term.goto_y(10)
         echo(u'\r\n\r\n{sep} Login: '.format(sep=sep_ok))
+
         handle = LineEditor(username_max_length, colors=colors
                             ).read() or u''
 
