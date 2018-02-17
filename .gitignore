@@ -6,4 +6,5 @@
 .x84/ssh*
 .x84/daily.log
 *.pyc
+.x84/daily*
 
